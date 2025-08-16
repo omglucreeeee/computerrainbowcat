@@ -1,103 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bouncing Rainbow Text with Cat</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-    body {
-      margin: 0;
-      overflow: hidden;
-      background: black;
-      font-family: 'Arial Black', sans-serif;
-    }
-    #textContainer {
-      position: absolute;
-      text-align: center;
-      font-weight: bold;
-    }
-    #mainText {
-      font-size: 50px;
-    }
-    #subtitle {
-      font-size: 20px;
-    }
-    #catContainer {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      text-align: center;
-    }
-    #cat {
-      width: 150px;  /* Adjust size as needed */
-      height: auto;
-      display: block;
-      margin: 0 auto;
-      transition: filter 0.1s linear;
-    }
-    #catName {
-      font-family: 'Pacifico', cursive;
-      font-size: 24px;
-      color: white;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bouncing Rainbow Text with Cat</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+  body {
+    margin: 0;
+    overflow: hidden;
+    background: black;
+    font-family: 'Arial Black', sans-serif;
+  }
+
+  #textContainer {
+    position: absolute;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  #mainText {
+    font-size: 50px;
+  }
+
+  #subtitle {
+    font-size: 20px;
+  }
+
+  #catContainer {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    text-align: center;
+  }
+
+  #cat {
+    width: 100px; /* Adjust size of your cat image */
+  }
+
+  #catName {
+    font-family: 'Pacifico', cursive;
+    font-size: 24px;
+    color: white;
+  }
+</style>
 </head>
 <body>
-  <div id="textContainer">
-    <div id="mainText">do not close pc</div>
-    <div id="subtitle">i politely ask</div>
-  </div>
-  <div id="catContainer">
-    <!-- Your local PNG file -->
-    <img id="cat" src="file:///C:/Users/spio8/Downloads/lol-removebg-preview.png" alt="Ciufi the Cat">
-    <div id="catName">Ciufi</div>
-  </div>
-  <script>
-    const container = document.getElementById('textContainer');
-    const mainText = document.getElementById('mainText');
-    const subtitle = document.getElementById('subtitle');
-    const catName = document.getElementById('catName');
-    const cat = document.getElementById('cat');
 
-    let posX = Math.random() * (window.innerWidth - container.offsetWidth);
-    let posY = Math.random() * (window.innerHeight - container.offsetHeight);
-    let velX = 1.5;
-    let velY = 1.5;
+<div id="textContainer">
+  <div id="mainText">do not close pc</div>
+  <div id="subtitle">i politely ask</div>
+</div>
 
-    function rainbowColor(offset = 0) {
-      const hue = (Date.now() / 50 + offset) % 360;
-      return `hsl(${hue}, 100%, 50%)`;
-    }
+<div id="catContainer">
+  <img id="cat" src="lol-removebg-preview.png" alt="Ciufi the Cat">
+  <div id="catName">Ciufi</div>
+</div>
 
-    function animate() {
-      posX += velX;
-      posY += velY;
-      if (posX + container.offsetWidth > window.innerWidth || posX < 0) velX *= -1;
-      if (posY + container.offsetHeight > window.innerHeight || posY < 0) velY *= -1;
+<script>
+const container = document.getElementById('textContainer');
+const mainText = document.getElementById('mainText');
+const subtitle = document.getElementById('subtitle');
+const catName = document.getElementById('catName');
 
-      container.style.left = posX + 'px';
-      container.style.top = posY + 'px';
+let posX = Math.random() * (window.innerWidth - container.offsetWidth);
+let posY = Math.random() * (window.innerHeight - container.offsetHeight);
+let velX = 1.5;
+let velY = 1.5;
 
-      const hueShift = (Date.now() / 50) % 360;
-      const color = rainbowColor();
+function rainbowColor(offset = 0) {
+  const hue = (Date.now() / 50 + offset) % 360;
+  return `hsl(${hue}, 100%, 50%)`;
+}
 
-      mainText.style.color = color;
-      subtitle.style.color = color;
-      catName.style.color = color;
+function animate() {
+  posX += velX;
+  posY += velY;
 
-      // Apply rainbow effect to cat image
-      cat.style.filter = `hue-rotate(${hueShift}deg)`;
+  if(posX + container.offsetWidth > window.innerWidth || posX < 0) velX *= -1;
+  if(posY + container.offsetHeight > window.innerHeight || posY < 0) velY *= -1;
 
-      requestAnimationFrame(animate);
-    }
+  container.style.left = posX + 'px';
+  container.style.top = posY + 'px';
 
-    animate();
+  const color = rainbowColor();
+  mainText.style.color = color;
+  subtitle.style.color = color;
+  catName.style.color = color;
 
-    window.addEventListener('resize', () => {
-      if (posX + container.offsetWidth > window.innerWidth) posX = window.innerWidth - container.offsetWidth;
-      if (posY + container.offsetHeight > window.innerHeight) posY = window.innerHeight - container.offsetHeight;
-    });
-  </script>
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+window.addEventListener('resize', () => {
+  if(posX + container.offsetWidth > window.innerWidth) posX = window.innerWidth - container.offsetWidth;
+  if(posY + container.offsetHeight > window.innerHeight) posY = window.innerHeight - container.offsetHeight;
+});
+</script>
+
 </body>
 </html>
